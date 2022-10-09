@@ -3,7 +3,7 @@ name: build
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*.*.*'
 
 jobs:
   build:
@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: set environment
+      run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
     - name: install dependencies
       run: sudo apt install libx11-dev libnotify-dev
     - name: build
@@ -21,7 +23,7 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: keyboard-notify-x11
-        asset_name: keyboard-notify-x11-${{ github.ref }}
+        asset_name: keyboard-notify-x11-${{ env.RELEASE_VERSION }}
         tag: ${{ github.ref }}
         overwrite: true
         body: ""
