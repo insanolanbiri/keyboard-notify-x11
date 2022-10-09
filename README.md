@@ -1,4 +1,4 @@
-depends on: `libx11-dev` `libnotify-dev` `libgtk2.0-dev`
+depends on: `libx11-dev` `libnotify-dev`
 
 installation:
 ```bash
