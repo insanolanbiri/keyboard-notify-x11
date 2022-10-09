@@ -1,0 +1,25 @@
+name: build
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: build and publish binaries
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: build
+      run: make release
+
+    - name: upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: keyboard-notify-x11
+        asset_name: keyboard-notify-x11-${{ github.ref }}
+        tag: ${{ github.ref }}
+        overwrite: true
+        body: ""
