@@ -14,7 +14,7 @@
 #define PRINT 0          /* print edilip edimeyeceği */
 #define SIGNAL_HANDLING 1
 
-static volatile int keepRunning = 1;
+static volatile unsigned char keepRunning = 1;
 
 #if SIGNAL_HANDLING
 struct sigaction siga;
